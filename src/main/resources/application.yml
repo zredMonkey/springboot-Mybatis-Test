@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test?characterEncoding=utf-8&serverTimezone=Hongkong&useSSL=true&zeroDateTimeBehavior=convertToNull
+    username: root
+    password: 19960225
+mybatis:
+  mapper-locations:
+  - classpath:mybatis/mapper/*.xml
+  - classpath:mybatis/mapper/auto/*.xml
+# 指定数据库中表生成实体的路径
+  type-aliases-package: com.springbootmybatis.test.model.po
+# 对应utils目录下的IBaseMapper模板Mapper
+mapper:
+  mappers: com.springbootmybatis.test.util.IBaseMapper

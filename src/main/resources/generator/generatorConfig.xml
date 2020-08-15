@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!-- 引入 application.yml -->
+    <properties resource="generator/application.properties" />
+
+    <!-- MyBatis3Simple：不生成 Example相关类及方法 -->
+    <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+        <property name="beginningDelimiter" value="`" />
+        <property name="endingDelimiter" value="`" />
+
+        <!-- 指定生成 Mapper 的继承模板 -->
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <property name="mappers" value="com.springbootmybatis.test.util.IBaseMapper" />
+        </plugin>
+
+        <!-- jdbc 连接配置 -->
+        <jdbcConnection driverClass="${spring.datasource.driver-class-name}"
+                        connectionURL="${spring.datasource.url}"
+                        userId="${spring.datasource.username}"
+                        password="${spring.datasource.password}">
+        </jdbcConnection>
+
+        <!-- 生成实体类的包名和位置 ，targetPackage指的是包名,targetProject值得是路径位置-->
+        <!-- 对于生成的pojo所在包,pojo其实就是domain Entity-->
+        <javaModelGenerator targetPackage="${generator.targetPackage}" targetProject="${generator.targetProject.model}">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!-- 对于生成的mapper.xml所在目录 -->
+        <sqlMapGenerator targetPackage="${generator.sqlXML-targetPackage}" targetProject="src/main/resources/mybatis/mapper"/>
+
+        <!-- 配置mapper对应的java映射  也可以叫dao层 -->
+        <javaClientGenerator targetPackage="${generator.javaClient-targetPackage}"
+                             targetProject="${generator.targetProject}"
+                             type="XMLMAPPER"/>
+
+        <table tableName="admin"></table>
+    </context>
+</generatorConfiguration>
